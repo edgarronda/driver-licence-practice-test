@@ -1,7 +1,7 @@
 body {
     padding-top: 5rem;
   }
-  .questions-section {
+  .questions-section, .validate {
     padding: 3rem 1.5rem;
     text-align: center;
   }

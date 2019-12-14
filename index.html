@@ -27,19 +27,23 @@
     </nav>
 
     <main role="main" class="container">
-
         <div class="questions-section" >
             <p id ="questions" class="lead"></p>
-            <div id = "answers">
-
-            </div>
-            <input type="button" value="a ver si acerté" onclick="comprobar()">
-
-        
+            <fieldset class="form-group">
+                <div class="row">
+                    <div class="col-sm-10" id ="answers">
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class = "validate">
+            <button type="button" class="btn btn-info" onclick="Validate()">VALIDATE</button>
         </div>
     </main><!-- /.container -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src='assets/js/notify.min.js'></script>
+    <script src='assets/js/questions.js'></script>
+    <script src='assets/js/answers.js'></script>
     <script src='assets/js/exam.js'></script>
 </body>
 </html>

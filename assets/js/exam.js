@@ -1,67 +1,55 @@
-var questions = [
-    "Test1?",
-    "Test2?",
-    "Test3?",
-    "Test4?"
-];
+var is_right_answer;
+Play();
 
-var answers = [
-    ["AnswerC11","ANswer12","Answer13"],
-    ["AnswerC21","ANswer22","Answer23"],
-    ["AnswerC31","ANswer32","Answer33"],
-    ["AnswerC41","ANswer42","Answer43"]
-];
-
-var indicie_respuesta_correcta;
-jugar();
-
-function jugar(){
+function Play(){
     var index = Math.floor(Math.random()*questions.length);
-    var respuestas_posibles = answers[index];
-    var posiciones = [0,1,2];
-    var respuestas_reordenadas = [];
-    var ya_se_metio = false;
+    var possible_answers = answers[index];
+    var positions = [0,1,2];
+    var orderer_answers = [];
+    var showed = false;
 
 
-    for(i in respuestas_posibles){
-        var posicion_aleatoria = Math.floor(Math.random()*posiciones.length);
-        if(posicion_aleatoria==0 && ya_se_metio == false){
-            indicie_respuesta_correcta =i;
-            ya_se_metio = true;
+    for(i in possible_answers){
+        var random_index = Math.floor(Math.random()*positions.length);
+        if(random_index==0 && showed == false){
+            is_right_answer =i;
+            showed = true;
         }
-        respuestas_reordenadas[i] = respuestas_posibles[posiciones[posicion_aleatoria]];
-        posiciones.splice(posicion_aleatoria, 1);
+        orderer_answers[i] = possible_answers[positions[random_index]];
+        positions.splice(random_index, 1);
     }
 
-    var txt_respuestas="";
-    for(i in respuestas_reordenadas){
-        txt_respuestas += '<input type="radio" name="pp" value="'+i+'"><label>'+respuestas_reordenadas[i]+'</label><br>';
+    var write_answers="";
+    for(i in orderer_answers){
+        write_answers += '<div class="form-check"> <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="'+i+'"> <label class="form-check-label" for="gridRadios1">'+orderer_answers[i]+' </label> </div>';
     }
 
-    document.getElementById("answers").innerHTML = txt_respuestas;
+    document.getElementById("answers").innerHTML = write_answers;
     document.getElementById("questions").innerHTML = questions[index];
 
 }
-function comprobar(){
-var respuesta = $("input[type=radio]:checked").val();
 
-if(respuesta ==indicie_respuesta_correcta){
-    $(".questions-section").notify(
-        "BIEN", 
-        { 
-            position:"bottom center",
-            className: 'success'
-        }
-      );
-}else{
-    $(".questions-section").notify(
-        "MAL", 
-        { 
-            position:"bottom center",
-            className: 'error'
-        }
-      );
-}
+// Validate
+function Validate(){
+    var user_answer = $("input[type=radio]:checked").val();
 
-jugar();
+    if(user_answer ==is_right_answer){
+        $(".questions-section").notify(
+            "BIEN", 
+            { 
+                position:"bottom center",
+                className: 'success',
+            }
+        );
+    }else{
+        $(".questions-section").notify(
+            "MAL", 
+            { 
+                position:"bottom center",
+                className: 'error'
+            }
+        );
+    }
+
+    Play();
 }
